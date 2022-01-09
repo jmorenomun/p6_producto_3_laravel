@@ -17,4 +17,16 @@ class CourseOffering extends Model
         return $this->belongsTo('App\Models\Teacher');
     }
 
+    public function works(){
+        return $this->hasMany('App\Models\Work');
+    }
+
+    public function exams(){
+        return $this->hasMany('App\Models\Exam');
+    }
+
+    public function percentages(){
+        return $this->hasMany('App\Models\Percentage');
+    }
+
 }

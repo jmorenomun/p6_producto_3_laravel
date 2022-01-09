@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Percentage extends Model
 {
     use HasFactory;
+
+    public function course_offering(){
+        return $this->belongsTo('App\Models\CourseOffering');
+    }
+
+    public function course(){
+        return $this->belongsTo('App\Models\Course');
+    }
 }

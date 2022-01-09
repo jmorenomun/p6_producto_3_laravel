@@ -5,28 +5,28 @@
     <div class="row">
         <div class="col-md-6 mx-auto">
         <div class="card card-body bg-light mt-5">
-            <h2>Add a New Course</h2>
-            {!! Form::open(['action' => 'CoursesController@store', 'method' => 'POST']) !!}
+            <h2>Add a New Student</h2>
+            {!! Form::open(['action' => 'StudentsController@store', 'method' => 'POST']) !!}
 
                 <div class="form-group">
                     {{ Form::label('name', 'Name') }}
                     {{ Form::text('name', '', ['class' => 'form-control', 'placeholder' => 'Name']) }}
               </div>
               <div class="form-group">
-                {{ Form::label('description', 'Description') }}
-                {{ Form::textarea('description', '', ['class' => 'form-control', 'placeholder' => 'Description']) }}
+                {{ Form::label('surname', 'Surname') }}
+                {{ Form::text('surname', '', ['class' => 'form-control', 'placeholder' => 'Surname']) }}
               </div>
               <div class="form-group">
-                {{ Form::label('date_start', 'Start Date') }}
-                {{ Form::date('date_start', '', ['class' => 'form-control']) }}
+                {{ Form::label('email', 'Email') }}
+                {{ Form::text('email', '', ['class' => 'form-control', 'placeholder' => 'Email']) }}
               </div>
               <div class="form-group">
-                {{ Form::label('date_end', 'End Date') }}
-                {{ Form::date('date_end', '', ['class' => 'form-control']) }}
+                {{ Form::label('telephone', 'Telephone') }}
+                {{ Form::text('telephone', '', ['class' => 'form-control', 'placeholder' => 'Telephone']) }}
               </div>
               <div class="form-group">
-                {{ Form::label('active', 'Active') }}
-                {{ Form::select('active', [0 => 'Not Active', 1 => 'Active'], 1, ['class' => 'form-control']) }}
+                {{ Form::label('nif', 'NIF') }}
+                {{ Form::text('nif', '', ['class' => 'form-control', 'placeholder' => 'NIF']) }}
               </div>
               <div class="row">
                   <div class="col">
@@ -40,7 +40,7 @@
     </div>
     <div class="row py-2">
         <div class="col text-center">
-            <a class="text-secondary" href="/courses">back to courses</a>
+            <a class="text-secondary" href="/students">back to students</a>
         </div>
     </div>
 @endsection

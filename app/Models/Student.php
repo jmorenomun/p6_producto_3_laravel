@@ -12,4 +12,16 @@ class Student extends Model
     public function user(){
         return $this->belongsTo('App\Models\User');
     }
+
+    public function enrollments(){
+        return $this->hasMany('App\Models\Enrollment');
+    }
+
+    public function works(){
+        return $this->hasMany('App\Models\Work');
+    }
+
+    public function exams(){
+        return $this->hasMany('App\Models\Exam');
+    }
 }

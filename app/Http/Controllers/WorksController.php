@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Models\Enrollment;
+use App\Models\Work;
 use App\Models\Student;
-use App\Models\Course;
+use App\Models\CourseOffering;
 use DB;
 
-
-class EnrollmentsController extends Controller
+class WorksController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,9 +18,9 @@ class EnrollmentsController extends Controller
      */
     public function index()
     {
-        $enrollments = Enrollment::all();
+        $works = Work::all();
 
-        return view('pages.enrollments.index')->with('enrollments', $enrollments);
+        return view('pages.works.index')->with('works', $works);
     }
 
     /**
@@ -34,8 +33,8 @@ class EnrollmentsController extends Controller
         $students = Student::select(
             DB::raw("CONCAT(name,' ',surname) AS name"),'id')
                 ->pluck('name', 'id');;
-        $courses = Course::pluck('name', 'id');
-        return view('pages.enrollments.create')->with(compact('courses', 'students'));
+        $course_offerings = CourseOffering::pluck('name', 'id');
+        return view('pages.works.create')->with(compact('course_offerings', 'students'));
     }
 
     /**
@@ -48,19 +47,21 @@ class EnrollmentsController extends Controller
     {
         // Validate fields
         $this->validate($request, [
-            'course_id' => 'required',
+            'course_offering_id' => 'required',
             'student_id' => 'required',
-            'status' => 'required'
+            'name' => 'required',
+            'mark' => 'required'
         ]);
 
-        $enrollment = new Enrollment;
-        $enrollment->course_id = $request->input('course_id');
-        $enrollment->student_id = $request->input('student_id');
-        $enrollment->status = $request->input('status');
+        $work = new Work;
+        $work->course_offering_id = $request->input('course_offering_id');
+        $work->student_id = $request->input('student_id');
+        $work->name = $request->input('name');
+        $work->mark = $request->input('mark');
 
-        $enrollment->save();
+        $work->save();
 
-        return redirect('/enrollments')->with('success', 'Enrollment created successfully');
+        return redirect('/works')->with('success', 'Work created successfully');
     }
 
     /**
@@ -71,8 +72,8 @@ class EnrollmentsController extends Controller
      */
     public function show($id)
     {
-        $enrollment = Enrollment::find($id);
-        return view('pages.enrollments.show')->with('enrollment', $enrollment);
+        $work = Work::find($id);
+        return view('pages.works.show')->with('work', $work);
     }
 
     /**
@@ -83,12 +84,12 @@ class EnrollmentsController extends Controller
      */
     public function edit($id)
     {
-        $enrollment = Enrollment::find($id);
+        $work = Work::find($id);
         $students = Student::select(
             DB::raw("CONCAT(name,' ',surname) AS name"),'id')
                 ->pluck('name', 'id');;
-        $courses = Course::pluck('name', 'id');
-        return view('pages.enrollments.edit')->with(compact('enrollment','courses', 'students'));
+        $course_offerings = CourseOffering::pluck('name', 'id');
+        return view('pages.works.edit')->with(compact('work', 'course_offerings', 'students'));
     }
 
     /**
@@ -102,19 +103,21 @@ class EnrollmentsController extends Controller
     {
         // Validate fields
         $this->validate($request, [
-            'course_id' => 'required',
+            'course_offering_id' => 'required',
             'student_id' => 'required',
-            'status' => 'required'
+            'name' => 'required',
+            'mark' => 'required'
         ]);
 
-        $enrollment = Enrollment::find($id);
-        $enrollment->course_id = $request->input('course_id');
-        $enrollment->student_id = $request->input('student_id');
-        $enrollment->status = $request->input('status');
+        $work = Work::find($id);
+        $work->course_offering_id = $request->input('course_offering_id');
+        $work->student_id = $request->input('student_id');
+        $work->name = $request->input('name');
+        $work->mark = $request->input('mark');
 
-        $enrollment->save();
+        $work->save();
 
-        return redirect('/enrollments')->with('success', 'Enrollment created successfully');
+        return redirect('/works')->with('success', 'Work '.$work->name.' has been updated');
     }
 
     /**
@@ -125,16 +128,15 @@ class EnrollmentsController extends Controller
      */
     public function destroy($id)
     {
-        $enrollment = Enrollment::find($id);
+        $work = Work::find($id);
 
         //Check if enrollemnt exists before deleting
-        if (!isset($enrollment)){
-            return redirect('/enrollments')->with('error', 'No enrollment found');
+        if (!isset($work)){
+            return redirect('/works')->with('error', 'No work found');
         }
 
-        $enrollment->delete();
+        $work->delete();
 
-        return redirect('/enrollments')->with('success', 'Enrollment deleted');
-
+        return redirect('/works')->with('success', 'Work deleted');
     }
 }

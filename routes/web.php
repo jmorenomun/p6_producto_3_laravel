@@ -21,3 +21,7 @@ Route::resource('courses', 'CoursesController');
 Route::resource('teachers', 'TeachersController');
 Route::resource('course_offerings', 'CourseOfferingsController');
 Route::resource('students', 'StudentsController');
+Route::resource('enrollments', 'EnrollmentsController');
+Route::resource('works', 'WorksController');
+Route::resource('exams', 'ExamsController');
+Route::resource('percentages', 'PercentagesController');
