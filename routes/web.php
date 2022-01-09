@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,6 +16,9 @@ use Illuminate\Support\Facades\Route;
 
 // Welcome page
 Route::get('/', 'PagesController@index');
+Route::get('/dashboard', 'PagesController@dashboard');
+Route::post('/login', 'LoginController@login');
+Route::get('/logout', 'LoginController@logout');
 
 // Resources
 Route::resource('courses', 'CoursesController');
@@ -25,3 +29,9 @@ Route::resource('enrollments', 'EnrollmentsController');
 Route::resource('works', 'WorksController');
 Route::resource('exams', 'ExamsController');
 Route::resource('percentages', 'PercentagesController');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
+require __DIR__.'/auth.php';

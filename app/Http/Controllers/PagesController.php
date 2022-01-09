@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
 
 class PagesController extends Controller
 {
@@ -14,5 +16,10 @@ class PagesController extends Controller
 
         return view('pages.welcome')->with($data);
 
+    }
+
+    public function dashboard(){
+
+        return view('dashboard');
     }
 }
