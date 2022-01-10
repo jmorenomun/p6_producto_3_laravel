@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Controllers\LoginController;
+use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,22 +16,31 @@ use App\Controllers\LoginController;
 
 // Welcome page
 Route::get('/', 'PagesController@index');
-Route::get('/dashboard', 'PagesController@dashboard');
-Route::post('/login', 'LoginController@login');
+
+// Login & logout routes
+Route::post('/login', 'LoginController@login')->name('login');
 Route::get('/logout', 'LoginController@logout');
 
-// Resources
-Route::resource('courses', 'CoursesController');
-Route::resource('teachers', 'TeachersController');
-Route::resource('course_offerings', 'CourseOfferingsController');
-Route::resource('students', 'StudentsController');
-Route::resource('enrollments', 'EnrollmentsController');
-Route::resource('works', 'WorksController');
-Route::resource('exams', 'ExamsController');
-Route::resource('percentages', 'PercentagesController');
+Route::get('/dashboard', 'DashboardController@dashboard')->name('dashboard');
 
-// Route::get('/dashboard', function () {
-//     return view('dashboard');
-// })->middleware(['auth'])->name('dashboard');
+// Protected routes for students
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('/dashboard/record', 'DashboardController@record')->name('record');
+    Route::get('/my-courses', 'DashboardController@courses')->name('my-courses');
+});
+
+// Protected routes for user admins
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::resource('courses', 'CoursesController');
+    Route::resource('teachers', 'TeachersController');
+    Route::resource('course_offerings', 'CourseOfferingsController');
+    Route::resource('students', 'StudentsController');
+    Route::resource('enrollments', 'EnrollmentsController');
+    Route::resource('works', 'WorksController');
+    Route::resource('exams', 'ExamsController');
+    Route::resource('percentages', 'PercentagesController');
+});
 
 require __DIR__.'/auth.php';

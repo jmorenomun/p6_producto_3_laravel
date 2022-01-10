@@ -10,7 +10,7 @@
   <title>{{ config('app.name') }}</title>
 </head>
     <body>
-        @include('inc.navbar')
+        @include('layouts.navigation')
         <div class="container">
             @include('inc.messages')
             @yield('content')

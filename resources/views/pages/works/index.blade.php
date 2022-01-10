@@ -12,7 +12,7 @@
             <h2 class="mb-3">Works</h2>
             </div>
             <div class="col-6 text-right">
-            <a class="btn btn-success btn-md" href="/enrollments/create">Add New</a>
+            <a class="btn btn-success btn-md" href="/works/create">Add New</a>
             </div>
         </div>
         <table class="table table-hover table-sm">

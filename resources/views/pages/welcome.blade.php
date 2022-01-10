@@ -31,8 +31,8 @@
                     <ul class="navbar-nav ms-auto my-2 my-lg-0">
                         <li class="nav-item"><a class="nav-link" href="#team">Develop Team</a></li>
                         <li class="nav-item"><a class="nav-link" href="#features">Main Features</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/students/login">Students</a></li>
-                        <li class="nav-item"><a class="nav-link" href="/admins/login">Admins</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/register">Register</a></li>
+                        <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
                     </ul>
                 </div>
             </div>

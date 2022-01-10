@@ -62,7 +62,7 @@ class RegisteredUserController extends Controller
         $student = new Student;
         $student->name = $request->input('name');
         $student->surname = $request->input('surname');
-        $student->username = strtolower($student->name.$student->surname).substr(time(), -4);
+        $student->username = str_replace(' ', '', strtolower($student->name.$student->surname).substr(time(), -4));
         $student->telephone = $request->input('telephone');
         $student->nif = $request->input('nif');
 
@@ -70,7 +70,7 @@ class RegisteredUserController extends Controller
         $student = $student->fresh();
 
         $user = new User;
-        $user->name = $student->username;
+        $user->name = $student->name;
         $user->email = $request->input('email');
         $user->password = Hash::make($request->password);
         $user->userable_id = $student->id;
